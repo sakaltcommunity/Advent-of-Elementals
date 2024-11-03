@@ -1,12 +1,13 @@
 package com.sakalti.aoe;
 
+import com.sakalti.aoe.entities.Shelran;
 import com.sakalti.aoe.items.Amethyst;
+import com.sakalti.aoe.world.RuboreomWorld;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraft.client.Minecraft;
@@ -17,12 +18,18 @@ public class AOE {
     public static final String MODID = "aoe";
 
     public AOE() {
+        // イベントリスナーの登録
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        // アメジストアイテムの登録
         Amethyst.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        // ルボレオムのワールドをセットアップ
+        RuboreomWorld.setup();
+        // シェランエンティティの登録
+        Shelran.SHELRAN.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
