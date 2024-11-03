@@ -15,11 +15,11 @@ public class Amethyst {
 
     // アメジストの剣（攻撃力8.5）
     public static final RegistryObject<Item> AMETHYST_SWORD = ITEMS.register("amethyst_sword", 
-        () -> new SwordItem(Tiers.DIAMOND, 8, -2.4F, new Properties().durability(1200))
+        () -> new SwordItem(Tiers.DIAMOND, 8, -2.4F, new Properties().durability(1200).enchantable())
     );
 
     // アメジストの斧（攻撃力11）
     public static final RegistryObject<Item> AMETHYST_AXE = ITEMS.register("amethyst_axe", 
-        () -> new AxeItem(Tiers.DIAMOND, 11, -3.0F, new Properties().durability(1200))
+        () -> new AxeItem(Tiers.DIAMOND, 11, -3.0F, new Properties().durability(1200).enchantable())
     );
 }
