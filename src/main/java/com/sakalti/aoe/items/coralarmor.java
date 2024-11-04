@@ -1,4 +1,4 @@
-package com.aoe.adventofsakalti;
+package com.sakalti.aoe;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.ArmorItem;
@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ArmorMaterials;
 
 public class AoeMod implements ModInitializer {
     public static final ItemGroup CORAL_GROUP = ItemGroup.build(new Identifier("aoe", "coral_group"));
