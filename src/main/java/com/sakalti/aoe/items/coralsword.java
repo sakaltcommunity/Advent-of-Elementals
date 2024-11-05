@@ -1,7 +1,7 @@
 package com.sakalti.aoe.items;
 
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemTier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.registries.DeferredRegister;
@@ -14,8 +14,8 @@ public class CoralSword {
 
     // コーラルソードの登録
     public static final RegistryObject<SwordItem> CORAL_SWORD = ITEMS.register("coral_sword", 
-        () -> new SwordItem(ItemTier.DIAMOND, 13, -2.4F, 
-            new Item.Properties().tab(CreativeModeTabs.COMBAT).durability(2001)
+        () -> new SwordItem(Tiers.DIAMOND, 13, -2.4F, 
+            new Item.Properties().tab(CreativeModeTabs.COMBAT).durability(2001).fireResistant()
         )
     );
 }
