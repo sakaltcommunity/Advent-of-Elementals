@@ -24,8 +24,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
 
 @Mod.EventBusSubscriber(modid = AOE.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class Shelran extends Mob {
@@ -48,7 +48,7 @@ public class Shelran extends Mob {
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
             .add(Attributes.MAX_HEALTH, 42.0D)
-            .add(Attributes.ATTACK_DAMAGE, 5.0D);  // デフォルトのダメージ、doHurtTargetで調整
+            .add(Attributes.ATTACK_DAMAGE, 5.0D);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Shelran extends Mob {
                 damage = 6.0F;
                 break;
             default:
-                damage = 5.0F; // デフォルトはNORMALのダメージ
+                damage = 5.0F;
         }
         return target.hurt(DamageSource.mobAttack(this), damage);
     }
@@ -73,7 +73,6 @@ public class Shelran extends Mob {
     @Override
     public void die(DamageSource cause) {
         super.die(cause);
-        // 1.3%の確率でコーラル剣をドロップ
         if (this.level.random.nextFloat() < 0.013) {
             ItemStack coralSword = new ItemStack(ItemInit.CORAL_SWORD.get());
             ItemEntity drop = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), coralSword);
@@ -81,26 +80,9 @@ public class Shelran extends Mob {
         }
     }
 
-    public static class ShelranModel extends AnimatedGeoModel<Shelran> {
-        @Override
-        public ResourceLocation getModelResource(Shelran entity) {
-            return new ResourceLocation(AOE.MODID, "geo/shelran.geo.json");
-        }
-
-        @Override
-        public ResourceLocation getTextureResource(Shelran entity) {
-            return new ResourceLocation(AOE.MODID, "textures/entity/shelran.png");
-        }
-
-        @Override
-        public ResourceLocation getAnimationResource(Shelran entity) {
-            return new ResourceLocation(AOE.MODID, "animations/shelran.animation.json");
-        }
-    }
-
-    public static class ShelranRenderer extends GeoEntityRenderer<Shelran> {
-        public ShelranRenderer(EntityRendererProvider.Context renderManager) {
-            super(renderManager, new ShelranModel());
+    public static class ShelranRenderer extends MobRenderer<Shelran, ShelranModel> {
+        public ShelranRenderer(EntityRendererProvider.Context context) {
+            super(context, new ShelranModel(), 0.5F);
         }
 
         @Override
